@@ -1,0 +1,238 @@
+.task-list-box {
+    box-shadow: 10px 10px 50px 3px rgba(39, 92, 141, 0.1);
+    border-radius: 12px;
+
+}
+
+.task-list-content {
+    padding: 32px 24px;
+}
+
+.task-list-content .border-dark {
+    border-color: #CCCCCC !important;
+}
+
+.task-form {
+
+    /* Base/Light */
+    background: #FFFFFF;
+
+    /* Shadow */
+    box-shadow: 10px 10px 50px 3px rgba(39, 92, 141, 0.1);
+    border-radius: 12px;
+}
+
+.btn-outline-primary {
+    border-radius: 27.5px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bg-lb {
+    background-color: #E7F1FF;
+}
+
+.bg-lg {
+    background-color: #EEEEEE;
+}
+
+.chat .chat-history {
+    max-height: 60vh;
+    min-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.chat .chat-history ul li {
+    list-style: none;
+    margin-bottom: 30px
+}
+
+.chat .chat-history ul li:last-child {
+    margin-bottom: 0px
+}
+
+.chat .chat-history ul li.date-val {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #CCCCCC;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+.chat .chat-history ul li.date-val span {
+    background: #fff;
+    padding: 0 10px;
+    color: #23242A;
+    font-size: 10px;
+}
+
+.chat .chat-history .message-data {
+    margin-bottom: 10px
+}
+
+.chat .chat-history .message-data img {
+    border-radius: 40px;
+    width: 30px
+}
+
+.chat .chat-history .message-data-time {
+    color: #434651;
+    padding-left: 6px
+}
+
+.chat .chat-history .message {
+    color: #444;
+    padding: 5px 10px;
+    line-height: 26px;
+    font-size: 14px;
+    border-radius: 7px;
+    display: inline-block;
+    position: relative;
+    min-width: 50px;
+}
+
+.chat .chat-history .message:after {
+    bottom: 100%;
+    left: 7%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #EEEEEE;
+    border-width: 10px;
+    margin-left: -25px
+}
+
+.chat .chat-history .my-message {
+    background: #E7F1FF
+}
+
+.chat .chat-history .my-message:after {
+    bottom: 100%;
+    left: 30px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #E7F1FF;
+    border-width: 10px;
+    margin-left: -10px
+}
+
+.chat .chat-history .other-message {
+    background: #EEEEEE;
+    text-align: right
+}
+
+.chat .chat-history .other-message:after {
+    border-bottom-color: #EEEEEE;
+    left: 93%
+}
+
+.chat .chat-message {
+    padding: 20px
+}
+
+.online,
+.offline,
+.me {
+    margin-right: 2px;
+    font-size: 8px;
+    vertical-align: middle
+}
+
+.online {
+    color: #86c541
+}
+
+.offline {
+    color: #e47297
+}
+
+.me {
+    color: #1d8ecd
+}
+
+.float-right {
+    float: right
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+@media only screen and (max-width: 767px) {
+    .chat-app .people-list {
+        height: 465px;
+        width: 100%;
+        overflow-x: auto;
+        background: #fff;
+        left: -400px;
+        display: none
+    }
+
+    .chat-app .people-list.open {
+        left: 0
+    }
+
+    .chat-app .chat {
+        margin: 0
+    }
+
+    .chat-app .chat .chat-header {
+        border-radius: 0.55rem 0.55rem 0 0
+    }
+
+    .chat-app .chat-history {
+        height: 300px;
+        overflow-x: auto
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .chat-app .chat-list {
+        height: 650px;
+        overflow-x: auto
+    }
+
+    .chat-app .chat-history {
+        height: 600px;
+        overflow-x: auto
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+    .chat-app .chat-list {
+        height: 480px;
+        overflow-x: auto
+    }
+
+    .chat-app .chat-history {
+        height: calc(100vh - 350px);
+        overflow-x: auto
+    }
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px dashed #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
