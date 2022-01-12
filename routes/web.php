@@ -25,13 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('key-auth/{key}', [\App\Http\Controllers\Auth\LoginController::class, 'loginByTaskKey'])->name('auth-by-key');
 
-Route::get('send-mail', [\App\Http\Controllers\TaskController::class, 'sendMail']);
-
 Route::middleware(['auth'])->group(function () {
-//    Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks.index');
-//    Route::get('/tasks/create', [App\Http\Controllers\TaskController::class, 'create'])->name('tasks.create');
-//    Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'store'])->name('tasks.store');
-//    Route::get('/tasks/created', [App\Http\Controllers\TaskController::class, 'created'])->name('tasks.created');
-
     Route::resource('tasks', TaskController::class);
 });

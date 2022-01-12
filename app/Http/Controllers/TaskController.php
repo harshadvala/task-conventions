@@ -134,15 +134,4 @@ class TaskController extends Controller
 
         return Redirect::route('tasks.index');
     }
-
-    /**
-     * @return void
-     */
-    public function sendMail()
-    {
-        $details = Task::first();
-
-        \Illuminate\Support\Facades\Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\TaskDetailMail($details));
-
-    }
 }
