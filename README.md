@@ -30,3 +30,4 @@ And finally, run all the migration files
 
 ![3](https://user-images.githubusercontent.com/5895908/149079146-8445d35f-0c10-4596-82fe-4c70636a5c89.png)
 
+![4](https://user-images.githubusercontent.com/5895908/149080608-f0a1e706-07de-46a3-94b9-19f947e29ad3.png)
