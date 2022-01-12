@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +24,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('key-auth/{key}', [\App\Http\Controllers\Auth\LoginController::class, 'loginByTaskKey'])->name('auth-by-key');
+Route::get('key-auth/{key}', [LoginController::class, 'loginByTaskKey'])->name('auth-by-key');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('tasks', TaskController::class);

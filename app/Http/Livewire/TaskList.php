@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\TaskChat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class TaskList extends Component
@@ -72,6 +73,14 @@ class TaskList extends Component
 
     public function deleteTask($id)
     {
+        $task=Task::where('id', $id)->first();
         Task::where('id', $id)->delete();
+
+        // Remove attached file if exist
+        if($task->file){
+            if (Storage::exists($task->file)) {
+                Storage::delete($task->file);
+            }
+        }
     }
 }
