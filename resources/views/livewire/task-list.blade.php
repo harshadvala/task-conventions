@@ -1,10 +1,10 @@
 <div class="row py-0">
     @if($tasks->count()>0)
-        <div class="col-md-6 border-end border-light border-3 task-list-content">
+        <div class="col-md-6 border-end border-light border-3 task-list-content" id="task-list-content">
             @foreach($tasks as $ind=>$task)
-                <div wire:click="selectTask({{$task->id}})"
-                     class=" cursor-pointer border-dark border-1 px-1 py-2 {!! (($ind+1)>=$tasks->count())?'border-0':'border-bottom' !!}">
-                    <div class="d-flex justify-content-between mt-2">
+                <div
+                    class="task-node cursor-pointer border-dark border-1 px-1 py-2 {!! (($ind+1)>=$tasks->count())?'border-0':'border-bottom' !!}">
+                    <div class="d-flex justify-content-between mt-2" wire:click="selectTask({{$task->id}})">
                         <div class="fs-7 fw-bold {!! ($task->id == $selectedTask)?'text-primary':'' !!}">
                             {!! $task->content !!}
                         </div>
@@ -16,8 +16,9 @@
                     </div>
                     <div class="">
                         <div class="small text-muted">
-                            {!! $task->description !!}
-
+                            <span wire:click="selectTask({{$task->id}})">
+                                {!! $task->description !!}
+                            </span>
                             @if($task->user_id === auth::id())
                                 <div class="d-flex align-bottom p-1 float-right">
                                     <a href="{!! route('tasks.edit',$task->id) !!}">

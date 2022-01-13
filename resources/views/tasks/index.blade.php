@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="card p-5 border-light">
         <div class="card-body">
             <div class="row">
@@ -23,4 +22,23 @@
             </div>
         </div>
     </div>
+@endsection
+@section('ex_js')
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            function scrollDown(){
+                $('.chat-history').animate({ scrollTop: $('.chat-history').height() }, 800);
+            }
+
+            $('#task-list-content').on('click', '.task-node', function () {
+                scrollDown();
+                setTimeout(function () {
+                    scrollDown();
+                }, 500);
+            });
+            scrollDown();
+        });
+    </script>
 @endsection

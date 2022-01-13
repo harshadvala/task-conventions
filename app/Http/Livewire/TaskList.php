@@ -34,7 +34,6 @@ class TaskList extends Component
     public function selectTask($id)
     {
         $this->selectedTask = $id;
-
     }
 
     public function refreshTaskRecord()
@@ -73,14 +72,17 @@ class TaskList extends Component
 
     public function deleteTask($id)
     {
-        $task=Task::where('id', $id)->first();
+        $task = Task::where('id', $id)->first();
         Task::where('id', $id)->delete();
 
         // Remove attached file if exist
-        if($task->file){
+        if ($task->file) {
             if (Storage::exists($task->file)) {
                 Storage::delete($task->file);
             }
         }
+
+        $this->selectedTask = '';
+        $this->taskObject = null;
     }
 }

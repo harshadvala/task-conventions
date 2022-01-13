@@ -130,7 +130,7 @@
                                         <div class="col-md-12 form-group mb-3">
                                             <input
                                                 class="form-control border-0 form-control-lg fs-6 @error('email') is-invalid @enderror"
-                                                value="{!! old('email', (isset($task) && $task)?$task->email:'') !!}"
+                                                value="{!! old('email', (isset($task) && $task)?$task->email:Auth::user()->email) !!}"
                                                 name="email" placeholder="Your Email Address">
                                         </div>
 
