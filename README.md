@@ -7,7 +7,7 @@ TaskManager is a Laravel application which manage projects, tasks and communicat
 First clone the git repository:
 
 ```
-    git clone git@github.com:harshadvala/Task-Manager.git
+    git clone git@github.com:harshadvala/task-conventions.git
 ```
 Then Run Command to Install Dependencies
 
