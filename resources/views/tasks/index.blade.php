@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card p-5 border-light">
+    <div class="card p-0 p-md-5 border-light">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
@@ -17,7 +17,6 @@
 
                 <div class="col-md-12 mt-3 task-list-box">
                     <livewire:task-list/>
-
                 </div>
             </div>
         </div>
@@ -28,8 +27,28 @@
     <script>
         $(document).ready(function () {
 
+            console.log('Tasks.');
+
+            // listen for message
+            Echo.channel('laravel-live-chat')
+                .listen('NewChatMessageEvent', (e) => {
+                   $('#refresh-chat-btn').trigger('click');
+                   // scrollDown();
+                    scrollToBottom();
+                });
+
+            // scroll chat container to bottom
+            function scrollToBottom() {
+                setTimeout(() => {
+                    var ele = $('.chat-history');
+                    ele.scrollTop(ele.prop("scrollHeight"));
+                    // $('.chat-content').getNiceScroll(0).doScrollTop($('.chat-content').height());
+                }, 900);
+            }
+
             function scrollDown(){
-                $('.chat-history').animate({ scrollTop: $('.chat-history').height() }, 800);
+                scrollToBottom();
+                // $('.chat-history').animate({ scrollTop: $('.chat-history').height() }, 800);
             }
 
             $('#task-list-content').on('click', '.task-node', function () {

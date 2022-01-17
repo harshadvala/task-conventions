@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="card p-5 border-light">
+    <div class="card p-0 p-md-5 border-light">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 mb-3">
@@ -18,7 +18,7 @@
 
                 <div class="col-md-12 mt-3">
                     <div class="row py-0">
-                        <div class="col-md-5">
+                        <div class="col-sm-12 col-md-5">
                             <small>Your unique generated key</small>
                             <div class="my-6">
                                 <h4>{!! $task->key !!}</h4>

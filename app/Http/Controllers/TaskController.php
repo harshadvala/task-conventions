@@ -69,7 +69,7 @@ class TaskController extends Controller
 
         $request->session()->flash('created', $task->id);
 
-        Mail::to($task->email)->send(new TaskDetailMail($task));
+//        Mail::to($task->email)->send(new TaskDetailMail($task));
 
         return $this->created($request);
 

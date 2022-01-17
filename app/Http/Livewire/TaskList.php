@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\NewChatMessageEvent;
 use App\Models\Task;
 use App\Models\TaskChat;
 use App\Models\User;
@@ -15,7 +16,7 @@ class TaskList extends Component
     public $selectedTask = '';
     public $conversations = [];
     public $message = '';
-    private $taskObject = null;
+    public $taskObject = null;
 
     public function render()
     {
@@ -34,6 +35,7 @@ class TaskList extends Component
     public function selectTask($id)
     {
         $this->selectedTask = $id;
+        $this->taskObject = Task::find($id);
     }
 
     public function refreshTaskRecord()
@@ -68,6 +70,8 @@ class TaskList extends Component
         $taskChat->to_id = $toId;
         $taskChat->save();
         $this->message = '';
+
+        broadcast(new NewChatMessageEvent());
     }
 
     public function deleteTask($id)

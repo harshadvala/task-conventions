@@ -14322,6 +14322,12 @@ textarea.form-control-lg {
     padding: 32px 24px;
 }
 
+.task-list {
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .task-list-content .border-dark {
     border-color: #CCCCCC !important;
 }
@@ -14353,8 +14359,8 @@ textarea.form-control-lg {
 }
 
 .chat .chat-history {
-    max-height: 60vh;
-    min-height: 60vh;
+    max-height: 65vh;
+    min-height: 65vh;
     overflow-y: auto;
     overflow-x: hidden;
 }

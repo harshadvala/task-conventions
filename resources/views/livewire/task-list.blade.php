@@ -1,6 +1,6 @@
 <div class="row py-0">
     @if($tasks->count()>0)
-        <div class="col-md-6 border-end border-light border-3 task-list-content" id="task-list-content">
+        <div class="col-md-6 border-end border-light border-3 task-list-content task-list" id="task-list-content">
             @foreach($tasks as $ind=>$task)
                 <div
                     class="task-node cursor-pointer border-dark border-1 px-1 py-2 {!! (($ind+1)>=$tasks->count())?'border-0':'border-bottom' !!}">
@@ -36,14 +36,29 @@
             @endforeach
 
         </div>
-        <div class="col-md-6 task-list-content">
-            <div class="row">
+        <div class="col-md-6 task-list-content ">
+            <div class="row gx-5">
+                @if($taskObject)
+                    <div class="bg-light p-2 d-md-none border border-light w-100">
+                        {!! $taskObject->content !!}
+                    </div>
+                @endif
                 <div class="col-lg-12">
                     @if($selectedTask)
+
+
                         <div class="chat-app">
+
                             <div class="chat">
-                                <div class="chat-history px-1">
-                                    <ul class="p-0">
+                                <div class="text-end border-bottom  border-light mb-2 d-none">
+                                    <button class="btn btn-light btn-sm mb-1" id="refresh-chat-btn"
+                                            wire:click="refreshChat">
+                                        <i class="fa fa-refresh text-secondary "></i> Refresh Chat
+                                    </button>
+                                </div>
+
+                                <div class="chat-history px-2">
+                                    <ul class="p-0 pe-1">
                                         @php
                                             $prevMsg=null;
                                         @endphp

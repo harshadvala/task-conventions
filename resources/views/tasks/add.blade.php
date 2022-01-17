@@ -2,8 +2,6 @@
 
 @section('ex_css')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
     <style>
         .slider-container {
             width: 100%;
@@ -65,7 +63,7 @@
 @endsection
 @section('content')
 
-    <div class="card p-5 border-light">
+    <div class="card p-0 p-md-5 border-light">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 mb-3">
@@ -83,7 +81,7 @@
                 <div class="col-md-12 mt-3">
                     <div class="row py-0">
                         <div class="col-md-5">
-                            <div class="justify-content-center p-5"
+                            <div class="justify-content-center p-4 p-md-5"
                                  style="box-shadow: 10px 10px 50px 3px rgba(39, 92, 141, 0.1);border-radius: 12px;">
 
                                 <h4>
@@ -182,7 +180,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-7 task-list-content">
+                        <div class="col-12 col-md-7 d-none d-md-block task-list-content">
                             <img class="mx-lg-5" style="max-width: 550px" src="{!! asset('images/task.png') !!}">
                         </div>
                     </div>
@@ -193,7 +191,6 @@
 @endsection
 
 @section('ex_js')
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
         $(document).ready(function () {
