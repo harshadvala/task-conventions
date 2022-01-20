@@ -8,6 +8,7 @@ use App\Models\TaskChat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Jenssegers\Agent\Agent;
 use Livewire\Component;
 
 class TaskList extends Component
@@ -17,9 +18,18 @@ class TaskList extends Component
     public $conversations = [];
     public $message = '';
     public $taskObject = null;
+    public $agent = '';
 
     public function render()
     {
+        $agent = new Agent();
+        if ($agent->isMobile()) {
+            $this->agent = 'Mobile';
+        } else {
+            $this->agent = 'Other';
+        }
+
+
         $this->tasks = Task::when(!Auth::user()->is_admin, function ($query) {
             $query->where('user_id', Auth::id());
         })->orderBy('created_at', 'desc')->get();
@@ -54,24 +64,26 @@ class TaskList extends Component
 
     public function sendMessage()
     {
-        $toId = Auth::id();
-        if (!$this->taskObject) {
-            $this->refreshTaskRecord();
-        }
-        if (Auth::id() == $this->taskObject->user_id) {
-            $toId = User::where('is_admin', true)->first()->id;
-        } else {
-            $toId = $this->taskObject->user_id;
-        }
-        $taskChat = new TaskChat();
-        $taskChat->task_id = $this->selectedTask;
-        $taskChat->message = $this->message;
-        $taskChat->from_id = Auth::id();
-        $taskChat->to_id = $toId;
-        $taskChat->save();
-        $this->message = '';
+        if (!empty($this->message)) {
+            $toId = Auth::id();
+            if (!$this->taskObject) {
+                $this->refreshTaskRecord();
+            }
+            if (Auth::id() == $this->taskObject->user_id) {
+                $toId = User::where('is_admin', true)->first()->id;
+            } else {
+                $toId = $this->taskObject->user_id;
+            }
+            $taskChat = new TaskChat();
+            $taskChat->task_id = $this->selectedTask;
+            $taskChat->message = $this->message;
+            $taskChat->from_id = Auth::id();
+            $taskChat->to_id = $toId;
+            $taskChat->save();
+            $this->message = '';
 
-        broadcast(new NewChatMessageEvent());
+            broadcast(new NewChatMessageEvent());
+        }
     }
 
     public function deleteTask($id)

@@ -66,7 +66,7 @@
     <div class="card p-0 p-md-5 border-light">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12 mb-3">
+                <div class="d-none d-md-block col-md-12 mb-3">
                     <a href="{!! route('home') !!}" style="color:  #C8C5C5;" class="text-uppercase small">
                         <i class="fa fa-chevron-left" style="color: #C8C5C5"></i> Back To HOME PAGE
                     </a>
@@ -80,7 +80,7 @@
 
                 <div class="col-md-12 mt-3">
                     <div class="row py-0">
-                        <div class="col-md-5">
+                        <div class="col-12 col-lg-5">
                             <div class="justify-content-center p-4 p-md-5"
                                  style="box-shadow: 10px 10px 50px 3px rgba(39, 92, 141, 0.1);border-radius: 12px;">
 
@@ -180,7 +180,7 @@
 
                             </div>
                         </div>
-                        <div class="col-12 col-md-7 d-none d-md-block task-list-content">
+                        <div class="col-12 col-md-7 d-none d-lg-block task-list-content">
                             <img class="mx-lg-5" style="max-width: 550px" src="{!! asset('images/task.png') !!}">
                         </div>
                     </div>

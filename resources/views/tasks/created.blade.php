@@ -4,7 +4,7 @@
     <div class="card p-0 p-md-5 border-light">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12 mb-3">
+                <div class="d-none d-md-block col-md-12 mb-3">
                     <a href="{!! route('home') !!}" style="color:  #C8C5C5;" class="text-uppercase small">
                         <i class="fa fa-chevron-left" style="color: #C8C5C5"></i> Back To HOME PAGE
                     </a>

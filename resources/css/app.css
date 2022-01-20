@@ -14,6 +14,12 @@
     overflow-x: hidden;
 }
 
+.scroll-v {
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .task-list-content .border-dark {
     border-color: #CCCCCC !important;
 }

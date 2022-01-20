@@ -21,6 +21,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
+    {{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--}}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     @yield('ex_css')
     @livewireStyles
 </head>
@@ -28,9 +32,21 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
+            @if(Route::currentRouteName() == 'tasks.index')
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+            @else
+                <a class="navbar-brand d-none d-md-block" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+
+                <a href="{!! route('home') !!}"
+                   class="navbar-brand  text-uppercase d-sm-block d-md-none small text-secondary">
+                    <i class="fa fa-chevron-left" style="color: #C8C5C5"></i> Back To HOME PAGE
+                </a>
+            @endif
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

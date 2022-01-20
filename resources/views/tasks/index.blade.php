@@ -4,12 +4,12 @@
     <div class="card p-0 p-md-5 border-light">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-6">
                     <h2>
                         Your Tasks
                     </h2>
                 </div>
-                <div class="col-md-6 text-end">
+                <div class="col-6 text-end">
                     <a href="{!! route('tasks.create') !!}" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-plus"></i> Add New Task
                     </a>
@@ -34,6 +34,7 @@
                 .listen('NewChatMessageEvent', (e) => {
                    $('#refresh-chat-btn').trigger('click');
                    // scrollDown();
+                    console.log('New Message !!')
                     scrollToBottom();
                 });
 

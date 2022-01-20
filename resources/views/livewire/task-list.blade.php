@@ -1,10 +1,18 @@
 <div class="row py-0">
+    <button class="btn btn-light btn-sm mb-1 d-none" id="refresh-chat-btn"
+            wire:click="refreshChat">
+        <i class="fa fa-refresh text-secondary "></i> Refresh Chat
+    </button>
     @if($tasks->count()>0)
-        <div class="col-md-6 border-end border-light border-3 task-list-content task-list" id="task-list-content">
+        <div
+            class="col-md-6 border-end border-light border-3 task-list-content {!! ($agent !== 'Mobile')?'scroll-v':'' !!}"
+            id="task-list-content">
             @foreach($tasks as $ind=>$task)
                 <div
                     class="task-node cursor-pointer border-dark border-1 px-1 py-2 {!! (($ind+1)>=$tasks->count())?'border-0':'border-bottom' !!}">
-                    <div class="d-flex justify-content-between mt-2" wire:click="selectTask({{$task->id}})">
+                    <div class="d-flex justify-content-between mt-2" wire:click="selectTask({{$task->id}})"
+                         @if($agent == 'Mobile') data-toggle="modal" data-target="#exampleModal" @endif>
+
                         <div class="fs-7 fw-bold {!! ($task->id == $selectedTask)?'text-primary':'' !!}">
                             {!! $task->content !!}
                         </div>
@@ -36,89 +44,86 @@
             @endforeach
 
         </div>
-        <div class="col-md-6 task-list-content ">
-            <div class="row gx-5">
-                @if($taskObject)
-                    <div class="bg-light p-2 d-md-none border border-light w-100">
-                        {!! $taskObject->content !!}
+        @if($agent !== 'Mobile')
+            <div class="d-none d-md-block col-md-6 task-list-content ">
+                <div class="row gx-5">
+                    @if($taskObject)
+                        <div class="bg-light p-2 d-md-none border border-light w-100">
+                            {!! $taskObject->content !!}
+                        </div>
+                    @endif
+                    <div class="col-lg-12">
+                        @if($selectedTask)
+                            <div class="chat-app">
+                                <div class="chat">
+                                    <div class="chat-history px-2">
+                                        @include('livewire.conversation')
+                                    </div>
+                                    <div class="chat-message clearfix px-0">
+                                        <div class="input-group mb-0">
+                                            <input type="text" wire:keydown.enter="sendMessage" wire:model="message"
+                                                   class="form-control border-0 form-control-lg fs-6" maxlength="190"
+                                                   placeholder="Type text here...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
-                @endif
-                <div class="col-lg-12">
-                    @if($selectedTask)
+                </div>
+            </div>
+        @endif
+    @else
+        <div class="col-md-12 text-muted text-center align-middle my-5 py-5">
+            No Tasks Found
+        </div>
+    @endif
 
+    @if($agent == 'Mobile')
+        <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-fullscreen" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            @if($taskObject)
+                                {!! $taskObject->content !!}
+                            @endif
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true close-btn">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body chat-history" style="height: 80vh ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chat-app">
 
-                        <div class="chat-app">
+                                    <div class="chat">
+                                        <div class="text-end border-bottom  border-light mb-2 d-none">
+                                            <button class="btn btn-light btn-sm mb-1" id="refresh-chat-btn"
+                                                    wire:click="refreshChat">
+                                                <i class="fa fa-refresh text-secondary "></i> Refresh Chat
+                                            </button>
+                                        </div>
 
-                            <div class="chat">
-                                <div class="text-end border-bottom  border-light mb-2 d-none">
-                                    <button class="btn btn-light btn-sm mb-1" id="refresh-chat-btn"
-                                            wire:click="refreshChat">
-                                        <i class="fa fa-refresh text-secondary "></i> Refresh Chat
-                                    </button>
-                                </div>
-
-                                <div class="chat-history px-2">
-                                    <ul class="p-0 pe-1">
-                                        @php
-                                            $prevMsg=null;
-                                        @endphp
-                                        @foreach($conversations as $row)
-                                            @if(!$prevMsg || ($prevMsg && $row->created_at->format('Y-m-d') !== $prevMsg->created_at->format('Y-m-d')))
-                                                <li class="clearfix date-val">
-                                                    <span class="small">
-                                                        {{ ($row->created_at->isToday())?'Today': (($row->created_at->isYesterday())?'Yesterday':$row->created_at->format('M d, Y')) }}
-                                                    </span>
-                                                </li>
-                                            @endif
-                                            @if(Auth::id()!== $row->from_id)
-                                                <li class="clearfix">
-                                                    <div class="message-data">
-                                                        <img
-                                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGQ8dQ-LMiMmTEyBijR0FzpQHC7tH6qTE2g&usqp=CAU"
-                                                            alt="avatar">
-                                                        <span class="message-data-time">{!! $row->from->name !!}
-                                                            <span class="small text-muted px-1">
-                                                                <small><i class="fa fa-clock-o"></i> {{ $row->created_at->format('g:i A')  }}</small>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="message my-message">
-                                                        {!! $row->message !!}
-                                                    </div>
-                                                </li>
-                                            @else
-                                                <li class="clearfix">
-                                                    <div class="message-data text-end">
-                                                    <span class="message-data-time small text-muted"><i
-                                                            class="fa fa-clock-o"></i> {{ $row->created_at->format('g:i A')}}</span>
-                                                    </div>
-                                                    <div class="message other-message float-right text-start">
-                                                        {!! $row->message !!}
-                                                    </div>
-                                                </li>
-                                            @endif
-                                            @php
-                                                $prevMsg = $row;
-                                            @endphp
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <div class="chat-message clearfix px-0">
-                                    <div class="input-group mb-0">
-                                        <input type="text" wire:keydown.enter="sendMessage" wire:model="message"
-                                               class="form-control border-0 form-control-lg fs-6" maxlength="190"
-                                               placeholder="Type text here...">
+                                        <div class="chat-history px-2" style="height: unset;overflow: unset">
+                                            @include('livewire.conversation')
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    </div>
+                    <div class="modal-footer">
+                        <div class="input-group mb-0">
+                            <input type="text" wire:keydown.enter="sendMessage" wire:model="message"
+                                   class="form-control border-0 form-control-lg fs-6" maxlength="190"
+                                   placeholder="Type text here...">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    @else
-        <div class="col-md-12 text-muted text-center align-middle my-5 py-5">
-            No Tasks Found
         </div>
     @endif
 </div>
