@@ -16,6 +16,7 @@ class CreateTaskChatsTable extends Migration
         Schema::create('task_chats', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('task_id');
+            $table->unsignedBigInteger('from_id');
             $table->unsignedBigInteger('to_id');
             $table->string('message');
             $table->boolean('is_read')->default(false);
